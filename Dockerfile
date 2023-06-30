@@ -1,5 +1,4 @@
 FROM centos:latest
-LABEL maintainer "Grupo8"
 RUN yum -y install httpd
 RUN yum -y install php
 CMD /usr/sbin/httpd -D FOREGROUND
