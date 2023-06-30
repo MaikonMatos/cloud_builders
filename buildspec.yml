@@ -15,7 +15,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t cicd_final_grupo8 .
-      - docker tag cicd_final_grupo8:latest 383711282156.dkr.ecr.us-east-1.amazonaws.com/cicd_final_grupo8:latest
+      - docker push 383711282156.dkr.ecr.us-east-1.amazonaws.com/cicd_final_grupo8:latest
   post_build:
     commands:
       - echo Build completed on `date`
