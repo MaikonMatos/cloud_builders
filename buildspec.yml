@@ -2,10 +2,15 @@ version: 0.2
 
 
 phases:
+  env:
+    secrets-manager:
+      DOCKERHUB_PASS: "Grupo8Fiap"
+      DOCKERHUB_USERNAME: "Fiap@Grupo8"
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
+      - docker login --username $DOCKERHUB_USERNAME --password $DOCKERHUB_PASS
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 667737679266.dkr.ecr.us-east-1.amazonaws.com
       - REPOSITORY_URI=667737679266.dkr.ecr.us-east-1.amazonaws.com/cicd_final_grupo8
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
@@ -22,7 +27,7 @@ phases:
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"devops","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
+      - printf '[{"name":"cicd_final_grupo8","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
       - cat imagedefinitions.json 
 artifacts:
     files: 
