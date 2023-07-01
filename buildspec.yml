@@ -14,15 +14,15 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t cicd_final_grupo8 .
-      - docker tag cicd_final_grupo8:latest 383711282156.dkr.ecr.us-east-1.amazonaws.com/cicd_final_grupo8:latest
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push 383711282156.dkr.ecr.us-east-1.amazonaws.com/cicd_final_grupo8:latest
+      - docker push $REPOSITORY_URI:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"cicd_final_grupo8","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
+      - printf '[{"name":"devops","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
       - cat imagedefinitions.json 
 artifacts:
     files: 

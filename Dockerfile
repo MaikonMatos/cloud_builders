@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM centos:latest
 RUN yum -y install httpd
 RUN yum -y install php
 CMD /usr/sbin/httpd -D FOREGROUND
