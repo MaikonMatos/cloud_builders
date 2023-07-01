@@ -1,6 +1,6 @@
-FROM centos:latest
-RUN apt update && apt install httpd sudo
-RUN apt update && apt install  php sudo
+FROM ubuntu:latest
+RUN yum -y install httpd
+RUN yum -y install php
 CMD /usr/sbin/httpd -D FOREGROUND
 WORKDIR /var/www/html
 ADD site /var/www/html
